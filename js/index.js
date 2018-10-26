@@ -1,98 +1,371 @@
-const EVENTS =[
-  {event: ["carrot","exercise","weekend"],octopus:false},
-  {event: ["bread","pudding","brushed teeth","weekend","touched tree"],octopus:false},
-  {event: ["carrot","nachos","brushed teeth","cycling","weekend"],octopus:false},
-  {event: ["brussel sprouts","ice cream","brushed teeth","computer","weekend"],octopus:false},
-  {event: ["potatoes","candy","brushed teeth","exercise","weekend","dentist"],octopus:false},
-  {event: ["brussel sprouts","pudding","brushed teeth","running","weekend"],octopus:false},
-  {event: ["pizza","brushed teeth","computer","work","touched tree"],octopus:false},
-  {event: ["bread","beer","brushed teeth","cycling","work"],octopus:false},
-  {event: ["cauliflower","brushed teeth","work"],octopus:false},
-  {event: ["pizza","brushed teeth","cycling","work"],octopus:false},
-  {event: ["lasagna","nachos","brushed teeth","work"],octopus:false},
-  {event: ["brushed teeth","weekend","touched tree"],octopus:false},
-  {event: ["lettuce","brushed teeth","television","weekend"],octopus:false},
-  {event: ["spaghetti","brushed teeth","work"],octopus:false},
-  {event: ["brushed teeth","computer","work"],octopus:false},
-  {event: ["lettuce","nachos","brushed teeth","work"],octopus:false},
-  {event: ["carrot","brushed teeth","running","work"],octopus:false},
-  {event: ["brushed teeth","work"],octopus:false},
-  {event: ["cauliflower","reading","weekend"],octopus:false},
-  {event: ["bread","brushed teeth","weekend"],octopus:false},
-  {event: ["lasagna","brushed teeth","exercise","work"],octopus:false},
-  {event: ["spaghetti","brushed teeth","reading","work"],octopus:false},
-  {event: ["carrot","ice cream","brushed teeth","television","work"],octopus:false},
-  {event: ["spaghetti","nachos","work"],octopus:false},
-  {event: ["cauliflower","ice cream","brushed teeth","cycling","work"],octopus:false},
-  {event: ["spaghetti","peanuts","computer","weekend"],octopus:true},
-  {event: ["potatoes","ice cream","brushed teeth","computer","weekend"],octopus:false},
-  {event: ["potatoes","ice cream","brushed teeth","work"],octopus:false},
-  {event: ["peanuts","brushed teeth","running","work"],octopus:false},
-  {event: ["potatoes","exercise","work"],octopus:false},
-  {event: ["pizza","ice cream","computer","work"],octopus:false},
-  {event: ["lasagna","ice cream","work"],octopus:false},
-  {event: ["cauliflower","candy","reading","weekend"],octopus:false},
-  {event: ["lasagna","nachos","brushed teeth","running","weekend"],octopus:false},
-  {event: ["potatoes","brushed teeth","work"],octopus:false},
-  {event: ["carrot","work"],octopus:false},
-  {event: ["pizza","beer","work","dentist"],octopus:false},
-  {event: ["lasagna","pudding","cycling","work"],octopus:false},
-  {event: ["spaghetti","brushed teeth","reading","work"],octopus:false},
-  {event: ["spaghetti","pudding","television","weekend"],octopus:false},
-  {event: ["bread","brushed teeth","exercise","weekend"],octopus:false},
-  {event: ["lasagna","peanuts","work"],octopus:true},
-  {event: ["pizza","work"],octopus:false},
-  {event: ["potatoes","exercise","work"],octopus:false},
-  {event: ["brushed teeth","exercise","work"],octopus:false},
-  {event: ["spaghetti","brushed teeth","television","work"],octopus:false},
-  {event: ["pizza","cycling","weekend"],octopus:false},
-  {event: ["carrot","brushed teeth","weekend"],octopus:false},
-  {event: ["carrot","beer","brushed teeth","work"],octopus:false},
-  {event: ["pizza","peanuts","candy","work"],octopus:true},
-  {event: ["carrot","peanuts","brushed teeth","reading","work"],octopus:false},
-  {event: ["potatoes","peanuts","brushed teeth","work"],octopus:false},
-  {event: ["carrot","nachos","brushed teeth","exercise","work"],octopus:false},
-  {event: ["pizza","peanuts","brushed teeth","television","weekend"],octopus:false},
-  {event: ["lasagna","brushed teeth","cycling","weekend"],octopus:false},
-  {event: ["cauliflower","peanuts","brushed teeth","computer","work","touched tree"],octopus:false},
-  {event: ["lettuce","brushed teeth","television","work"],octopus:false},
-  {event: ["potatoes","brushed teeth","computer","work"],octopus:false},
-  {event: ["bread","candy","work"],octopus:false},
-  {event: ["potatoes","nachos","work"],octopus:false},
-  {event: ["carrot","pudding","brushed teeth","weekend"],octopus:false},
-  {event: ["carrot","brushed teeth","exercise","weekend","touched tree"],octopus:false},
-  {event: ["brussel sprouts","running","work"],octopus:false},
-  {event: ["brushed teeth","work"],octopus:false},
-  {event: ["lettuce","brushed teeth","running","work"],octopus:false},
-  {event: ["candy","brushed teeth","work"],octopus:false},
-  {event: ["brussel sprouts","brushed teeth","computer","work"],octopus:false},
-  {event: ["bread","brushed teeth","weekend"],octopus:false},
-  {event: ["cauliflower","brushed teeth","weekend"],octopus:false},
-  {event: ["spaghetti","candy","television","work","touched tree"],octopus:false},
-  {event: ["carrot","pudding","brushed teeth","work"],octopus:false},
-  {event: ["lettuce","brushed teeth","work"],octopus:false},
-  {event: ["carrot","ice cream","brushed teeth","cycling","work"],octopus:false},
-  {event: ["pizza","brushed teeth","work"],octopus:false},
-  {event: ["spaghetti","peanuts","exercise","weekend"],octopus:true},
-  {event: ["bread","beer","computer","weekend","touched tree"],octopus:false},
-  {event: ["brushed teeth","running","work"],octopus:false},
-  {event: ["lettuce","peanuts","brushed teeth","work","touched tree"],octopus:false},
-  {event: ["lasagna","brushed teeth","television","work"],octopus:false},
-  {event: ["cauliflower","brushed teeth","running","work"],octopus:false},
-  {event: ["carrot","brushed teeth","running","work"],octopus:false},
-  {event: ["carrot","reading","weekend"],octopus:false},
-  {event: ["carrot","peanuts","reading","weekend"],octopus:true},
-  {event: ["potatoes","brushed teeth","running","work"],octopus:false},
-  {event: ["lasagna","ice cream","work","touched tree"],octopus:false},
-  {event: ["cauliflower","peanuts","brushed teeth","cycling","work"],octopus:false},
-  {event: ["pizza","brushed teeth","running","work"],octopus:false},
-  {event: ["lettuce","brushed teeth","work"],octopus:false},
-  {event: ["bread","brushed teeth","television","weekend"],octopus:false},
-  {event: ["cauliflower","peanuts","brushed teeth","weekend"],octopus:false}
+const REGISTRY = [{
+    events: ["carrot", "exercise", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["bread", "pudding", "brushed teeth", "weekend", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "nachos", "brushed teeth", "cycling", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["brussel sprouts", "ice cream", "brushed teeth", "computer", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["potatoes", "candy", "brushed teeth", "exercise", "weekend", "dentist"],
+    octopus: false
+  },
+  {
+    events: ["brussel sprouts", "pudding", "brushed teeth", "running", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "brushed teeth", "computer", "work", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["bread", "beer", "brushed teeth", "cycling", "work"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "brushed teeth", "cycling", "work"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "nachos", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["brushed teeth", "weekend", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["lettuce", "brushed teeth", "television", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["brushed teeth", "computer", "work"],
+    octopus: false
+  },
+  {
+    events: ["lettuce", "nachos", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "brushed teeth", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "reading", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["bread", "brushed teeth", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "brushed teeth", "exercise", "work"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "brushed teeth", "reading", "work"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "ice cream", "brushed teeth", "television", "work"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "nachos", "work"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "ice cream", "brushed teeth", "cycling", "work"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "peanuts", "computer", "weekend"],
+    octopus: true
+  },
+  {
+    events: ["potatoes", "ice cream", "brushed teeth", "computer", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["potatoes", "ice cream", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["peanuts", "brushed teeth", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["potatoes", "exercise", "work"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "ice cream", "computer", "work"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "ice cream", "work"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "candy", "reading", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "nachos", "brushed teeth", "running", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["potatoes", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "work"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "beer", "work", "dentist"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "pudding", "cycling", "work"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "brushed teeth", "reading", "work"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "pudding", "television", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["bread", "brushed teeth", "exercise", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "peanuts", "work"],
+    octopus: true
+  },
+  {
+    events: ["pizza", "work"],
+    octopus: false
+  },
+  {
+    events: ["potatoes", "exercise", "work"],
+    octopus: false
+  },
+  {
+    events: ["brushed teeth", "exercise", "work"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "brushed teeth", "television", "work"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "cycling", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "brushed teeth", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "beer", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "peanuts", "candy", "work"],
+    octopus: true
+  },
+  {
+    events: ["carrot", "peanuts", "brushed teeth", "reading", "work"],
+    octopus: false
+  },
+  {
+    events: ["potatoes", "peanuts", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "nachos", "brushed teeth", "exercise", "work"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "peanuts", "brushed teeth", "television", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "brushed teeth", "cycling", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "peanuts", "brushed teeth", "computer", "work", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["lettuce", "brushed teeth", "television", "work"],
+    octopus: false
+  },
+  {
+    events: ["potatoes", "brushed teeth", "computer", "work"],
+    octopus: false
+  },
+  {
+    events: ["bread", "candy", "work"],
+    octopus: false
+  },
+  {
+    events: ["potatoes", "nachos", "work"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "pudding", "brushed teeth", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "brushed teeth", "exercise", "weekend", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["brussel sprouts", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["lettuce", "brushed teeth", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["candy", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["brussel sprouts", "brushed teeth", "computer", "work"],
+    octopus: false
+  },
+  {
+    events: ["bread", "brushed teeth", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "brushed teeth", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "candy", "television", "work", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "pudding", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["lettuce", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "ice cream", "brushed teeth", "cycling", "work"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["spaghetti", "peanuts", "exercise", "weekend"],
+    octopus: true
+  },
+  {
+    events: ["bread", "beer", "computer", "weekend", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["brushed teeth", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["lettuce", "peanuts", "brushed teeth", "work", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "brushed teeth", "television", "work"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "brushed teeth", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "brushed teeth", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "reading", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["carrot", "peanuts", "reading", "weekend"],
+    octopus: true
+  },
+  {
+    events: ["potatoes", "brushed teeth", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["lasagna", "ice cream", "work", "touched tree"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "peanuts", "brushed teeth", "cycling", "work"],
+    octopus: false
+  },
+  {
+    events: ["pizza", "brushed teeth", "running", "work"],
+    octopus: false
+  },
+  {
+    events: ["lettuce", "brushed teeth", "work"],
+    octopus: false
+  },
+  {
+    events: ["bread", "brushed teeth", "television", "weekend"],
+    octopus: false
+  },
+  {
+    events: ["cauliflower", "peanuts", "brushed teeth", "weekend"],
+    octopus: false
+  }
 ]
 
-function printJournal(){
- console.log(EVENTS.toString());
+
+
+function printJournal() {
+  REGISTRY.forEach(day => {
+    console.log(day.octopus + '\t-> [' + day.events.toString() + ']');
+  });
 }
 
 printJournal()
