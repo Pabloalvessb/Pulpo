@@ -360,7 +360,9 @@ const REGISTRY = [{
   }
 ]
 
-
+function hasEvent(events, event) {
+  return events.includes(event)
+}
 
 function printJournal() {
   REGISTRY.forEach(day => {
@@ -368,4 +370,7 @@ function printJournal() {
   });
 }
 
-printJournal()
+// printJournal()
+
+console.log(hasEvent(REGISTRY[0].events, "pizza"));
+console.log(hasEvent(REGISTRY[0].events, "carrot"));
