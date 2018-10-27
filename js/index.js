@@ -121,24 +121,54 @@ function printJournal() {
   });
 }
 
-var correlacionTable = [];
-
 function getAllEvents() {
   let eventsList = [];
   REGISTRY.forEach(day => {
     day.events.forEach(event => {
-      if (!correlacionTable.includes(event)) correlacionTable.push(event);
+      if (!eventsList.includes(event)) eventsList.push(event);
     });
+  });
+  return eventsList;
+}
+
+function getCorrelationTable(register) {
+  let correlationTable = [];
+  let eventsList = getAllEvents();
+  eventsList.forEach(event => {
+    let correlation = { name: event, table: [0, 0, 0, 0] };
+    register.forEach(day => {
+      (day.events.includes(event)) ?
+        ((day.octopus) ? correlation.table[3]++ : correlation.table[2]++)
+        :
+        (((day.octopus) ? correlation.table[1]++ : correlation.table[0]++));
+    });
+
+    correlationTable.push(correlation)
+  });
+  return correlationTable;
+}
+
+function getPhiTable(register) {
+  let correlationTable = getCorrelationTable(register);
+  correlationTable.forEach(event => {
+    event.phi=getPhi(event.table)
   });
 }
 
-getAllEvents()
+function getPhi(correlation) {
+  let n1 = correlation[0]
+  let n2 = correlation[1]
+  let n3 = correlation[2]
+  let n4 = correlation[3]
 
-console.log(correlacionTable.toString());
+  let dividend = (n1 * n4) - (n2 * n3)
+  let divider = Math.sqrt((n1 + n2) * (n3 + n4) * (n1 + n3) * (n2 + n4));
 
-// addDay(REGISTRY[0]);
-// printDiary();
-// printDay(REGISTRY[0]);
+  return dividend / divider
+}
+
+
+console.log(getPhi([76, 4, 9, 1]));
 
 // ----------------------------------TESTS-------------------------------------------
 
@@ -174,8 +204,6 @@ function tests() {
 
   // Check the diary lenght
   console.log('Diary lenght == 3\t -> \t' + (TEST_DIARY.length == 3));
-
-
 }
 
 // tests()
