@@ -124,16 +124,17 @@ function printJournal() {
 var correlacionTable = [];
 
 function getAllEvents() {
+  let eventsList = [];
   REGISTRY.forEach(day => {
     day.events.forEach(event => {
-      if (correlacionTable.includes(event)) correlacionTable.push(event);
+      if (!correlacionTable.includes(event)) correlacionTable.push(event);
     });
   });
 }
 
 getAllEvents()
 
-console.log(correlacionTable);
+console.log(correlacionTable.toString());
 
 // addDay(REGISTRY[0]);
 // printDiary();
