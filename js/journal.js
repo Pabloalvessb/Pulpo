@@ -1,4 +1,4 @@
-export const REGISTRY = [
+const REGISTRY = [
   { events: ["carrot", "exercise", "weekend"], octopus: false },
   { events: ["bread", "pudding", "brushed teeth", "weekend", "touched tree"], octopus: false },
   { events: ["carrot", "nachos", "brushed teeth", "cycling", "weekend"], octopus: false },
@@ -90,3 +90,5 @@ export const REGISTRY = [
   { events: ["bread", "brushed teeth", "television", "weekend"], octopus: false },
   { events: ["cauliflower", "peanuts", "brushed teeth", "weekend"], octopus: false }
 ]
+
+module.exports = REGISTRY;
